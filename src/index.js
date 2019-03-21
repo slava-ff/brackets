@@ -6,13 +6,13 @@ module.exports = function check(str, bracketsConfig) {
   var leftString = [];
   var rightString = [];
 
+  // здесь мы сложили левые скобки с левыми, правые с правыми. 
+  // В leftBrackets[i] скобка соответствует своей паре rightBrackets[i]
   for (var i = 0; i < bracketsConfig.length; i++) {
     console.log(bracketsConfig[i]);
     let x = bracketsConfig[i];
     leftBrackets.push(x[0]);
     rightBrackets.push(x[1]);
-    // console.log('leftBrackets: ', leftBrackets); // it works
-    // console.log('rightBrackets: ', rightBrackets); // it works
   }
 
   //  пока что с лево правыми скобками норм показвает, но вот палками и одинаковыми цифрами - фигово...
@@ -25,7 +25,15 @@ module.exports = function check(str, bracketsConfig) {
     } else
     
     if (findInArray(rightBrackets, str[i]) != -1) {
-      rightString.push(str[i]);
+      // rightString.push(str[i]);
+      x = findInArray(rightBrackets, str[i]);
+      console.log('x: ', x);
+      if (pair (bracketsConfig, leftString[leftString.length-1], str[i]) == true ) {
+        leftString.pop();
+      } else {
+        return false;
+      }
+      return true;
     }
 
   }
@@ -41,6 +49,19 @@ module.exports = function check(str, bracketsConfig) {
       if (array[i] === value) return i;
     }
     return -1;
+  }
+
+  function pair (bracketsConfig, value1, value2) {
+    for (var i = 0; i < bracketsConfig.length; i++) {
+      let x = bracketsConfig[i];
+      if (value1 == x[0]) {
+        if (value2 == x[1]) {
+          return true;
+        } else {
+          return false;
+        }
+      }
+    }
   }
 
 
