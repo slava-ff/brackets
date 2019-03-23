@@ -1,13 +1,14 @@
 module.exports = function check(str, bracketsConfig) {
   // your solution
   //var l = bracketsConfig.length;
+  
+  ////////////////////   РЕШЕНИЕ 60%, не получается с одинаковыми знаками: ||, 77, 88   //////////////////////
+  /*
   var leftBrackets = [];
   var rightBrackets = [];
   var leftString = [];
   var rightString = [];
 
-  // здесь мы сложили левые скобки с левыми, правые с правыми. 
-  // В leftBrackets[i] скобка соответствует своей паре rightBrackets[i]
   for (var i = 0; i < bracketsConfig.length; i++) {
     console.log(bracketsConfig[i]);
     let x = bracketsConfig[i];
@@ -16,7 +17,6 @@ module.exports = function check(str, bracketsConfig) {
   }
 
   //  пока что с лево правыми скобками норм показвает, но вот палками и одинаковыми цифрами - фигово...
-
   for (var i = 0; i < str.length; i++) {
     // str[i]; // ???
 
@@ -63,8 +63,28 @@ module.exports = function check(str, bracketsConfig) {
       }
     }
   }
-
-
+*/
+////////////////////   РЕШЕНИЕ 100%, получается с одинаковыми знаками: ||, 77, 88   //////////////////////
+  var pairs = [];
+  for (let i = 0; i < bracketsConfig.length; i++) {
+    console.log(bracketsConfig[i]);
+    let x = bracketsConfig[i];
+    pairs.push(x[0]+x[1]);
+  }
+  console.log('pairs: ', pairs);
+  
+    for (let k = 0; k < 100; k++) {
+      for (let i = 0; i < pairs.length; i++) {
+        let x = pairs[i];
+        str = str.replace(x, "");
+      }
+    }
+  
+  
+  if (str != '') {
+    return false;
+  } else {
+    return true;
+  }
 
 }
-  // 11111 56 11111111 2222 888888 2222 55 77 8 7777 8 77 55556666 7777777777 66 22222
